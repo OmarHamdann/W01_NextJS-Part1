@@ -1,21 +1,25 @@
+import Link from 'next/link'
 
+export default function Pokemons({ pokemons }) {
+  return (
+    <div>
+      {pokemons.map((pokemon) => (
+        <div key={pokemon.id}>
+          <Link href="/pokemons/[name]" as={`/pokemons/${pokemon.name}`}>
+            <a>{pokemon.name}</a>
+          </Link>
+          
+        </div>
+      ))}
+    </div>
+  );
+}
 
-export default function Pokemons({pokemon}) {
+export async function getServerSideProps() {
+  // Fetch data from external API
+  const res = await fetch(`https://pokeapi.co/api/v2/pokemon`);
+  const pokemons = await res.json();
 
-    return (
-      <div >
-        <h1>Enter pokemon name</h1>
-      </div>
-    )
-  }
-  
-  export async function getServerSideProps() {
-    // Fetch data from external API
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon`)
-    const pokemon = await res.json()
-  
-    // Pass data to the page via props
-    return { props: {pokemon:pokemon.results.slice(0,20) } }
-  }
-  
- 
+  // Pass data to the page via props
+  return { props: { pokemons: pokemons.results} };
+}
