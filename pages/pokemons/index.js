@@ -1,3 +1,22 @@
+//////pulse check
+
+
+////question 1
+
+//when I need many render on the page I use CSR to avoid stress on the server but on the static page, I use SSR.
+
+
+
+////question 2
+
+//Complex games web application ====> CSR to avoid stress on the server because I need many renders.
+//Newsletter website ======> SSR it s a static page I render it little time so I use SSR.
+//Documentations website ======> SSR it s a static page I render it little time so I use SSR.
+
+
+
+
+
 import Link from 'next/link'
 export const getServerSideProps=async  ()=> {
   // Fetch data from external API
